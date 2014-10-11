@@ -1,4 +1,4 @@
-cmsi499
-=======
+CMSI 499: Wearable Programming
+==============================
 
-Wearable Programming course for Fall 2014, LMU Computer Science
+A collection of small wearable applications I made during my Independent Studies course at LMU.
