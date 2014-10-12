@@ -6,7 +6,7 @@ var App = {};
 App.serverURL = Settings.option("serverURL") || "www.google.com";
 App.data = {};
 
-Settings.config(
+/*Settings.config(
   {
     url: "http://my.cs.lmu.edu/~tbramant/serverstats/ServerStats.html?site=" + App.serverURL
   },
@@ -18,7 +18,25 @@ Settings.config(
     console.log('closed configurable');
     console.log("new serverURL: " + e.options.serverURL);
   }
-);
+);*/
+
+// This is garbage.
+// Figure it out with settings.config.
+
+Pebble.addEventListener("showConfiguration", function() {
+  console.log("showing configuration");
+  Pebble.openURL("http://my.cs.lmu.edu/~tbramant/serverstats/ServerStats.html?site="+App.serverURL);
+});
+
+Pebble.addEventListener("webviewclosed", function(e) {
+  var options = JSON.parse(decodeURIComponent(e.response));
+  console.log("configuration closed");
+  if (options.serverURL) {
+    App.serverURL = options.serverURL;
+    Settings.option("serverURL", options.serverURL)
+  }
+  console.log("new serverURL: " + options.serverURL);
+});
 
 App.init = function() {
   App.menu = new UI.Menu({
@@ -66,8 +84,13 @@ App.init = function() {
         if (App.serverURL != priorServer) {
           App.menu.item(0, 0, {subtitle: App.serverURL});
           App.menu.item(0, 2, {subtitle: data.query});
-          App.menu.item(0, 3, {subtitle: data.city + ', ' + data.region});
-          App.menu.item(0, 4, {subtitle: data.lat + ', ' + data.lon});
+          if (data.city && data.region && data.lat && data.lon) {
+            App.menu.item(0, 3, {subtitle: data.city + ', ' + data.region});
+            App.menu.item(0, 4, {subtitle: data.lat + ', ' + data.lon});
+          } else {
+            App.menu.item(0, 3, {subtitle: "Unknown"});
+            App.menu.item(0, 4, {subtitle: "Unknown"});
+          }
         }
         if (App.data.serverStatus != priorStatus) {
           console.log("Change in server state!");
@@ -103,8 +126,10 @@ ajax(
       App.init();
     } else {
       App.data.ip = data.query;
-      App.data.regionLocation = data.city + ', ' + data.region;
-      App.data.ipLocation = data.lat + ', ' + data.lon;
+      if (data.city && data.region && data.lat && data.lon) {
+        App.data.regionLocation = data.city + ', ' + data.region;
+        App.data.ipLocation = data.lat + ', ' + data.lon;
+      }
       App.data.serverStatus = 'Online';
       App.init();
     }
