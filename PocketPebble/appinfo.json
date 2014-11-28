@@ -1,0 +1,38 @@
+{
+  "appKeys": {},
+  "capabilities": [
+      "configurable"
+  ],
+  "companyName": "Edward",
+  "longName": "PocketPebble",
+  "projectType": "pebblejs",
+  "resources": {
+    "media": [
+      {
+        "menuIcon": true,
+        "type": "png",
+        "name": "IMAGE_MENU_ICON",
+        "file": "images/menu_icon.png"
+      }, {
+        "type": "png",
+        "name": "IMAGE_LOGO_SPLASH",
+        "file": "images/logo_splash.png"
+      }, {
+        "type": "png",
+        "name": "IMAGE_TILE_SPLASH",
+        "file": "images/tile_splash.png"
+      }, {
+        "type": "font",
+        "name": "MONO_FONT_14",
+        "file": "fonts/UbuntuMono-Regular.ttf"
+      }
+    ]
+  },
+  "shortName": "PocketPebble",
+  "uuid": "f85a2274-8837-4f1a-a548-fb5f8a79a9aa",
+  "versionCode": 1,
+  "versionLabel": "0.1",
+  "watchapp": {
+      "watchface": false
+  }
+}
