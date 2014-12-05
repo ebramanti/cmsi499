@@ -80,6 +80,12 @@ if (App.access_token) {
     },
     function(data) {
       console.log("It worked!");
+      var card = new UI.Card({
+        title: 'Logged in.',
+        body: data.access_token,
+        scrollable: false
+      });
+      card.show();
       //App.init();
     },
     function(failure) {
