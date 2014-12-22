@@ -33,7 +33,7 @@ Pebble.addEventListener("webviewclosed", function(e) {
   console.log("configuration closed");
   if (options.serverURL) {
     App.serverURL = options.serverURL;
-    Settings.option("serverURL", options.serverURL)
+    Settings.option("serverURL", options.serverURL);
   }
   console.log("new serverURL: " + options.serverURL);
 });
@@ -117,7 +117,7 @@ ajax(
   {
     url: 'http://ip-api.com/json/' + App.serverURL,
     type: 'json',
-    method: 'get',
+    method: 'get'
   },
   function(data) {
     console.log(data.status.toUpperCase());

@@ -25,7 +25,7 @@ Pebble.addEventListener("showConfiguration", function() {
         }
       },
       function(data) {
-        var reqToken = data.code
+        var reqToken = data.code;
         Pebble.openURL("https://getpocket.com/auth/authorize?request_token=" + reqToken + "&redirect_uri=" + App.redirect_uri);
 
         Pebble.addEventListener("webviewclosed", function(e) {
@@ -55,15 +55,17 @@ Pebble.addEventListener("showConfiguration", function() {
         });
       },
       function(error) {
-        Pebble.openURL(App.redirect_uri)
+        Pebble.openURL(App.redirect_uri);
       }
     );
 });
 
 App.access_token = Settings.option("access_token") || null;
 
-// App.init = function() {
+// App logic goes here.
 
+// App.init = function() {
+//
 // };
 
 if (App.access_token) {
@@ -89,7 +91,7 @@ if (App.access_token) {
       //App.init();
     },
     function(failure) {
-      console.log("I don't know how to error properly yet.")
+      console.log("I don't know how to error properly yet.");
     }
   );
 } else {
